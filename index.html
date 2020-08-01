@@ -39,7 +39,7 @@
           <button class="btn btn-default" ng-click="toBuyController.buyItem($index, item.name, item.quantity);"><span class="glyphicon glyphicon-ok"></span> Bought</button>
        </li>
      </ul>
-     <div class="emptyMessage">{{toBuyController.errorMessage[0]}}</div>
+     <div ng-if="toBuyController.items.length == 0" class="emptyMessage">Everything is bought!</div>
     </div>
 
     <!-- Already Bought List -->
@@ -50,7 +50,7 @@
          Bought {{ item.quantity }} {{ item.name }}
        </li>
      </ul>
-     <div class="emptyMessage" >{{alreadyBoughtController.errorMessage[0]}}</div>
+     <div ng-if="alreadyBoughtController.items.length == 0" class="emptyMessage">Nothing bought yet.</div>
     </div>
   </div>
 </div>

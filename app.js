@@ -9,7 +9,7 @@ ToBuyController.$inject = ['ShoppingListCheckOffService'];
 function ToBuyController(ShoppingListCheckOffService) {
   var toBuyList = this;
   toBuyList.items = ShoppingListCheckOffService.getItemsToBuy();
-  toBuyList.errorMessage = ShoppingListCheckOffService.getToBuyMessage();
+
   toBuyList.buyItem = function (itemIndex, itemName, itemValue) {
     ShoppingListCheckOffService.buyItem(itemIndex, itemName, itemValue);
   };
@@ -22,7 +22,7 @@ function AlreadyBoughtController(ShoppingListCheckOffService) {
   var boughtList = this;
 
   boughtList.items = ShoppingListCheckOffService.getItemsBought();
-  boughtList.errorMessage = ShoppingListCheckOffService.getBoughtMessage();
+
 }
 
 
@@ -52,9 +52,6 @@ function ShoppingListCheckOffService() {
 ];
 var itemsBought = [];
 
-var toBuyErrorMessage = [];
-var boughtErrorMessage = ["Nothing bought yet"];
-
 service.buyItem = function (itemIndex, itemName, quantity) {
 
     itemsToBuy.splice(itemIndex, 1);
@@ -63,14 +60,6 @@ service.buyItem = function (itemIndex, itemName, quantity) {
       quantity: quantity
     };
     itemsBought.push(item);
-
-    if (itemsToBuy.length === 0) {
-      var str="Everything is bought!";
-      toBuyErrorMessage.push(str);
-    }
-    if (boughtErrorMessage.length > 0) {
-      boughtErrorMessage.splice(0,1)
-    }
   };
 
 service.getItemsToBuy = function () {
@@ -79,12 +68,6 @@ service.getItemsToBuy = function () {
 
 service.getItemsBought = function () {
     return itemsBought;
-  };
-service.getToBuyMessage = function () {
-    return toBuyErrorMessage;
-  };
-service.getBoughtMessage = function () {
-    return boughtErrorMessage;
   };
 }
 
